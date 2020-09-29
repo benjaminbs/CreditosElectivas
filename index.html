@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+ div.search-bar {
+	 display: flex;
+}
+ form.search {
+	 display: inline-flex;
+	 max-width: 0;
+	 overflow: hidden;
+	 transition: 0.5s ease all;
+}
+ form.search.open {
+	 max-width: 40em;
+}
+ input.search {
+	 margin: 0 0.4em;
+	 border: none;
+	 background: none;
+	 border-bottom: 1px solid #fff;
+	 color: yellow;
+	 font-family: inherit;
+	 font-size: 1.5em;
+	 min-width: 10em;
+	 width: 70vw;
+	 max-width: 20em;
+     text-align: center;
+}
+ input.search:focus {
+	 outline: none;
+}
+ .btn {
+	 display: inline-block;
+	 background: none;
+	 color: #fff;
+	 border: 1px solid #fff;
+	 border-radius: 0.25em;
+	 font-size: 1.2em;
+	 min-width: 3em;
+     cursor: pointer;
+}
+ .btn:focus {
+	 outline: none;
+	 color: #fff;
+	 background: black;
+}
+ span.search-icon {
+	 display: inline-block;
+	 position: relative;
+	 width: 2em;
+	 height: 2em;
+	 cursor: pointer;
+}
+ span.search-icon:after {
+	 content: '';
+	 display: inline-block;
+	 position: absolute;
+	 width: 50%;
+	 height: 50%;
+	 border-radius: 50%;
+	 top: 0;
+	 right: 0;
+	 border: 0.25em solid #fff;
+}
+ span.search-icon:before {
+	 content: '';
+	 display: inline-block;
+	 position: absolute;
+	 height: 0.25em;
+	 width: 42%;
+	 background: #fff;
+	 top: 50%;
+	 transform-origin: 100% 50%;
+	 transform: rotateZ(-45deg);
+}
+ div.body-container {
+	 min-height: 20vh;
+	 display: flex;
+	 justify-content: top;
+	 align-items: center;
+	 flex-direction: column;
+}
+ body {
+	 margin: 0;
+	 color: #fff;
+	 background: #017639;
+	 font-family: 'Roboto Mono', monospace;
+}
+
+.dvInformation{
+    text-align: center;
+    display: none;
+	justify-content: top;
+	align-items: left;
+	flex-direction: column;
+    background: rgba(0, 0, 0, 0.4);
+    max-width: 30em;
+    margin: auto;
+    padding: 0.5em 1em;
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+    border-radius: 10px;
+}
+.dvInformation h4{
+    font-size: 35px;
+    color: #fff;
+    margin: 4px 4px;
+}
+@media screen and (max-width: 600px) {
+    .dvInformation{
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+        width: 70%;
+    }
+    .dvInformation h4{
+        font-size: 25px;
+    }
+  .body-container {
+      text-align: center;
+    width: auto;
+    margin: auto;
+    display: flex;
+	 justify-content: top;
+	 align-items: center;
+	 flex-direction: column;
+  }
+  .btn{
+      margin-top: 4px;
+      margin-left: 160px;
+  }
+  form.search{
+    align-items: center;
+    display: flex;
+	justify-content: top;
+	align-items: center;
+	flex-direction: column;
+    width: auto;
+  }
+  span.search-icon:before{
+      left: 0%;
+  }
+}
+
+</style>
+
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Roboto);
+
+
+.wrapper {
+  height: 100%;
+  transition: all 300ms ease-in-out;  
+  margin: .1em 0;
+  padding: 0;
+}
+
+.background--blur {
+  background: #b52e31;
+}
+
+.menu {
+    text-align: center;
+  font-size:1.5em;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+}
+
+.menu div {
+  margin: 1em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #ccc;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #3367d6;
+}
+
+.menu a:hover {
+  text-decoration: underline;
+}
+
+.menu div:last-child {
+  border: 0;
+}
+
+.menu--off {
+  position: absolute;
+  left: -50%;
+  width: 30%;
+  display: block;
+  background: #eee;
+  min-height: 600px;
+  height: 25%;
+  margin-top: 1em;
+  transition: all 300ms;
+}
+
+.menu--on {
+  left: 0;
+  box-shadow: 8px 8px 20px 0 rgba(0, 0, 0, 0.2);
+  transition: all 300ms;
+}
+
+.material-design-hamburger button {
+  display: block;
+  border: none;
+  background: none;
+  outline: 0;
+}
+
+.material-design-hamburger__icon {
+  padding: 3rem 1rem;
+  cursor: pointer;
+}
+
+.material-design-hamburger__layer {
+  display: block;
+  width: 100px;
+  height: 10px;
+  background: #fad700;
+  position: relative;
+  animation-duration: 300ms;
+  animation-timing-function: ease-in-out;
+}
+
+.material-design-hamburger__layer:before, .material-design-hamburger__layer:after {
+  display: block;
+  width: inherit;
+  height: 10px;
+  position: absolute;
+  background: inherit;
+  left: 0;
+  content: '';
+  animation-duration: 300ms;
+  animation-timing-function: ease-in-out;
+}
+
+.material-design-hamburger__layer:before {
+  bottom: 200%;
+}
+
+.material-design-hamburger__layer:after {
+  top: 200%;
+}
+
+.material-design-hamburger__icon--to-arrow {
+  animation-name: material-design-hamburger__icon--slide;
+  animation-fill-mode: forwards;
+}
+
+.material-design-hamburger__icon--to-arrow:before {
+  animation-name: material-design-hamburger__icon--slide-before;
+  animation-fill-mode: forwards;
+}
+
+.material-design-hamburger__icon--to-arrow:after {
+  animation-name: material-design-hamburger__icon--slide-after;
+  animation-fill-mode: forwards;
+}
+
+.material-design-hamburger__icon--from-arrow {
+  animation-name: material-design-hamburger__icon--slide-from;
+}
+
+.material-design-hamburger__icon--from-arrow:before {
+  animation-name: material-design-hamburger__icon--slide-before-from;
+}
+
+.material-design-hamburger__icon--from-arrow:after {
+  animation-name: material-design-hamburger__icon--slide-after-from;
+}
+
+@keyframes material-design-hamburger__icon--slide {
+  0% {
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes material-design-hamburger__icon--slide-before {
+  0% {
+  }
+  100% {
+    transform: rotate(45deg);
+    margin: 3% 37%;
+    width: 75%;
+  }
+}
+
+@keyframes material-design-hamburger__icon--slide-after {
+  0% {
+  }
+  100% {
+    transform: rotate(-45deg);
+    margin: 3% 37%;
+    width: 75%;
+  }
+}
+
+@keyframes material-design-hamburger__icon--slide-from {
+  0% {
+    transform: rotate(-180deg);
+  }
+  100% {
+  }
+}
+
+@keyframes material-design-hamburger__icon--slide-before-from {
+  0% {
+    transform: rotate(45deg);
+    margin: 3% 37%;
+    width: 75%;
+  }
+  100% {
+  }
+}
+
+@keyframes material-design-hamburger__icon--slide-after-from {
+  0% {
+    transform: rotate(-45deg);
+    margin: 3% 37%;
+    width: 75%;
+  }
+  100% {
+  }
+}
+
+@media screen and (max-width: 600px) {
+    .menu{
+        font-size: 20px;
+        position: absolute;
+        z-index: 100;
+    }
+    .menu--off{
+        left: -130%;
+    } 
+    .menu--on{
+        width: auto;
+        left: 0%;
+    }
+}
+</style>
+
+<body>
+
+    <section class="wrapper">
+
+    <section class="material-design-hamburger">
+        <button class="material-design-hamburger__icon">
+        <span class="material-design-hamburger__layer"></span>
+        </button>
+    </section>
+    
+    <section class="menu menu--off">
+        <div>Creado por <a href="https://benjaminbs.github.io/MyWebsite/index.html" target="_blank">Benjamin Beltrán Sánchez</a></div>
+        <div>Su principal y única función es consultar los creditos de electivas obtenidos. (Basado en la ultima actualización que subió el Departamento de Electivas de UPIICSA)</div>
+        <div><img width="120" src="firebase.png"><img width="150" src="github.png"><img width="110" src="js.png"></div>
+    </section>
+    
+    </section>
+
+    <div class="body-container">
+        <h1>Consultar Creditos de Electivas</h1>
+        <div class="search-bar">
+          <span class="search-icon"></span>
+          <form class="search" action="" onsubmit="return false">
+            <input id="txtNumBoleta" class="search" type="text" autocomplete="off" placeholder="Ingresar boleta" required>
+            <button onclick="buscar()" type="submit" class="btn">BUSCAR</button>
+          </form>
+        </div>
+    </div>
+      
+    <div id="divDatos" class="dvInformation">
+    </div>
+
+
+
+<script>
+    var icon = document.getElementsByClassName("search-icon")[0];
+    var form = document.getElementsByClassName("search")[0];
+
+    icon.onclick = function(){
+        form.classList.toggle("open");
+        if(form.classList.contains("open")){
+            document.getElementById("txtNumBoleta").focus();
+        }
+    }
+                    
+</script>
+
+<script>
+    (function() {
+
+    'use strict';
+
+    document.querySelector('.material-design-hamburger__icon').addEventListener(
+    'click',
+    function() {      
+        var child;
+        
+        document.body.classList.toggle('background--blur');
+        this.parentNode.nextElementSibling.classList.toggle('menu--on');
+
+        child = this.childNodes[1].classList;
+
+        if (child.contains('material-design-hamburger__icon--to-arrow')) {
+        child.remove('material-design-hamburger__icon--to-arrow');
+        child.add('material-design-hamburger__icon--from-arrow');
+        } else {
+        child.remove('material-design-hamburger__icon--from-arrow');
+        child.add('material-design-hamburger__icon--to-arrow');
+        }
+
+    });
+
+    })();
+</script>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+    
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyCAYv62J3noH1bMY72Vvbt-XcCdBj28FcI",
+        authDomain: "electivas-4ba57.firebaseapp.com",
+        databaseURL: "https://electivas-4ba57.firebaseio.com",
+        projectId: "electivas-4ba57",
+        storageBucket: "electivas-4ba57.appspot.com",
+        messagingSenderId: "837432470351",
+        appId: "1:837432470351:web:52eefe8e0870ef78e2333a"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script>
+        var database = firebase.database();
+        var ref = database.ref("/Creditos Electivas/").limitToLast(1);
+
+        var datos = document.getElementById("divDatos");
+    
+function buscar(){
+    datos.style.display = "block"
+    var boleta = document.getElementById("txtNumBoleta").value;
+        //limpia la tabla
+        //table.innerHTML = "";
+        
+        //con esta función recorre todos los datos almacenados en FB ordenados por mi child(tipo)
+            
+        ref.orderByChild("BOLETA").equalTo(boleta).on("child_added", function(snapshot){
+        //repite el proceso como cuantas referencias encuentre y los asigna a la lista "d"
+            
+        var d = snapshot.val();        
+                
+        {
+
+        // asigna a las celdas el valir del Child especificado
+        datos.innerHTML ="<h4>"+ d.BOLETA+"</h4><hr><h4>"+  d.NOMBRE+"</h4><hr><h4>"+  d.CARRERA+"</h4><hr><h4>Creditos obtenidos: "+  d["CRED TOTALES"]+"</h4>";
+        
+        }
+        
+                
+        });
+}
+
+    </script>
+</body>
+</html>
