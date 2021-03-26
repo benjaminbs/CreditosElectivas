@@ -373,8 +373,8 @@
         <div class="search-bar">
           <span class="search-icon"></span>
           <form class="search" action="" onsubmit="return false">
-            <input id="txtNumBoleta" class="search" type="text" autocomplete="off" placeholder="Ingresar boleta" required>
-            <button onclick="buscar()" type="submit" class="btn">BUSCAR</button>
+            <input id="txtNumBoleta" class="search" type="number" autocomplete="off" placeholder="Ingresar boleta" required>
+            <button id="btnBuscarCreditos" type="submit" class="btn">BUSCAR</button>
           </form>
         </div>
     </div>
@@ -424,61 +424,7 @@
 
     })();
 </script>
-
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
-    
-<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#available-libraries -->
-
-    <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-        apiKey: "AIzaSyCAYv62J3noH1bMY72Vvbt-XcCdBj28FcI",
-        authDomain: "electivas-4ba57.firebaseapp.com",
-        databaseURL: "https://electivas-4ba57.firebaseio.com",
-        projectId: "electivas-4ba57",
-        storageBucket: "electivas-4ba57.appspot.com",
-        messagingSenderId: "837432470351",
-        appId: "1:837432470351:web:52eefe8e0870ef78e2333a"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    </script>
-
-    <script>
-        var database = firebase.database();
-        var ref = database.ref("/Creditos Electivas/").limitToLast(1);
-
-        var datos = document.getElementById("divDatos");
-    
-function buscar(){
-    datos.innerHTML = "";
-    datos.style.display = "block"
-    var boleta = document.getElementById("txtNumBoleta").value;
-        //limpia la tabla
-        //table.innerHTML = "";
-        
-        //con esta función recorre todos los datos almacenados en FB ordenados por mi child(tipo)
-            
-        ref.orderByChild("BOLETA").equalTo(boleta).on("child_added", function(snapshot){
-        //repite el proceso como cuantas referencias encuentre y los asigna a la lista "d"
-            
-        var d = snapshot.val();        
-                
-        {
-
-        // asigna a las celdas el valir del Child especificado
-        datos.innerHTML ="<h4>"+ d.BOLETA+"</h4><hr><h4>"+  d.NOMBRE+"</h4><hr><h4>"+  d.CARRERA+"</h4><hr><h4>Creditos obtenidos: "+  d["CRED TOTALES"]+"</h4>";
-        
-        }
-        
-                
-        });
-}
-
-    </script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="GetElectivas.js"></script>
 </body>
 </html>
